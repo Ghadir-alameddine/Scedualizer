@@ -1,7 +1,7 @@
 [project]
 name = "scedualizer"
 version = "0.1.0"
-description = "Add your description here"
+description = "Multi-college doctor schedule aggregator - claim weekly teaching slots on a grid, detect conflicts, and produce per-major-group timetables."
 readme = "README.md"
 authors = [
     { name = "Ghadir Alameddine", email = "ghadir.alamedddine@gmail.com" }
@@ -15,9 +15,41 @@ dependencies = [
     "streamlit>=1.67.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.10.0",
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+]
+
 [project.scripts]
 scedualizer = "scedualizer:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
 build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+]
+
+[tool.mypy]
+python_version = "3.12"
+strict = false
+warn_unused_ignores = true
+warn_redundant_casts = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
